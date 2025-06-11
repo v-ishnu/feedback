@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback | TechDev Solutions</title>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Feedback Section */
+        .feedback-section {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 40px auto;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            max-width: 800px;
+        }
+
+        .feedback-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            font-size: 2rem;
+        }
+
+        .feedback-subtitle {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #7f8c8d;
+        }
+
+        /* Form Styles */
+        .feedback-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .feedback-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .feedback-form input,
+        .feedback-form select,
+        .feedback-form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+
+        .feedback-form input:focus,
+        .feedback-form select:focus,
+        .feedback-form textarea:focus {
+            border-color: #6e8efb;
+            outline: none;
+        }
+
+        .feedback-form textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Rating Styles */
+        .rating-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .rating-option {
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .rating-option:hover {
+            transform: scale(1.1);
+        }
+
+        .rating-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+        }
+
+        .rating-input {
+            display: none;
+        }
+
+        .rating-input:checked + .rating-label {
+            color: #6e8efb;
+        }
+
+        .rating-label {
+            display: block;
+            cursor: pointer;
+        }
+
+
+        /* Captcha */
+        .grecaptcha-badge {
+            visibility: hidden;
+        }
+
+        .captcha-note {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            margin-top: -15px;
+            margin-bottom: 20px;
+        }
+
+        /* Button Styles */
+        .submit-btn {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: block;
+            width: 100%;
+            font-weight: 600;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(110, 142, 251, 0.4);
+        }
+
+        /* Thank You Message */
+        .thank-you {
+            text-align: center;
+            padding: 40px;
+            display: none;
+        }
+
+        .thank-you h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .thank-you p {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+        }
+
+        .thank-you-icon {
+            font-size: 4rem;
+            color: #27ae60;
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .rating-container {
+                flex-direction: column;
+            }
+
+            .rating-option {
+                margin-bottom: 15px;
+            }
+
+            .feedback-section {
+                padding: 20px;
+                margin: 20px auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">TechDev Solutions</div>
+            <div class="tagline">Building digital experiences that matter</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="feedback-section">
+            <h1 class="feedback-title">Share Your Feedback</h1>
+            <p class="feedback-subtitle">We value your opinion to help us improve our services</p>
+
+            <form id="feedbackForm" class="feedback-form">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="service">Service Used</label>
+                    <select id="service" name="service" required>
+                        <option value="">Select a service</option>
+                        <option value="web-development">Web Development</option>
+                        <option value="app-development">App Development</option>
+                        <option value="ui-ux">UI/UX Design</option>
+                        <option value="consulting">Consulting</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>How satisfied are you with our service?</label>
+                    <div class="rating-container">
+                        <div class="rating-option">
+                            <div class="rating-emoji">😞</div>
+                            <input type="radio" id="rating-1" name="rating" value="1" class="rating-input">
+                            <label for="rating-1" class="rating-label">Very Dissatisfied</label>
+                        </div>
+                        <div class="rating-option">
+                            <div class="rating-emoji">😕</div>
+                            <input type="radio" id="rating-2" name="rating" value="2" class="rating-input">
+                            <label for="rating-2" class="rating-label">Dissatisfied</label>
+                        </div>
+                        <div class="rating-option">
+                            <div class="rating-emoji">😐</div>
+                            <input type="radio" id="rating-3" name="rating" value="3" class="rating-input">
+                            <label for="rating-3" class="rating-label">Neutral</label>
+                        </div>
+                        <div class="rating-option">
+                            <div class="rating-emoji">😊</div>
+                            <input type="radio" id="rating-4" name="rating" value="4" class="rating-input">
+                            <label for="rating-4" class="rating-label">Satisfied</label>
+                        </div>
+                        <div class="rating-option">
+                            <div class="rating-emoji">😍</div>
+                            <input type="radio" id="rating-5" name="rating" value="5" class="rating-input">
+                            <label for="rating-5" class="rating-label">Very Satisfied</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="feedback">Your Feedback</label>
+                    <textarea id="feedback" name="feedback" placeholder="Tell us about your experience..." required></textarea>
+                </div>
+
+                <!-- Add CAPTCHA field -->
+        <div class="form-group">
+            <div class="g-recaptcha"
+                 data-sitekey="YOUR_SITE_KEY"
+                 data-callback="enableSubmit"
+                 data-size="invisible"></div>
+            <p class="captcha-note">This form is protected by reCAPTCHA to prevent spam.</p>
+        </div>
+
+                <button type="submit" class="submit-btn">Submit Feedback</button>
+            </form>
+
+            <div class="thank-you" id="thankYou">
+                <div class="thank-you-icon">✓</div>
+                <h2>Thank You for Your Feedback!</h2>
+                <p>We appreciate you taking the time to share your experience with us. Your feedback helps us improve our services.</p>
+                <p>Our team will review your comments and get back to you if needed.</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 TechDev Solutions. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Add reCAPTCHA script dynamically
+const recaptchaScript = document.createElement('script');
+recaptchaScript.src = 'https://www.google.com/recaptcha/api.js?render=6LfsmFwrAAAAAAt5dVgB7nJmMaHVcNjTxH-t_Hr9';
+document.head.appendChild(recaptchaScript);
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    const feedbackForm = document.getElementById('feedbackForm');
+    const thankYouSection = document.getElementById('thankYou');
+    const submitBtn = document.getElementById('submitBtn') ||
+                      feedbackForm.querySelector('button[type="submit"]');
+
+    // Create CAPTCHA badge and notice if they don't exist
+    if (!document.querySelector('.grecaptcha-badge')) {
+        const captchaContainer = document.createElement('div');
+        captchaContainer.className = 'grecaptcha-badge';
+        captchaContainer.style.visibility = 'hidden';
+        document.body.appendChild(captchaContainer);
+
+        const captchaNote = document.createElement('p');
+        captchaNote.className = 'captcha-note';
+        captchaNote.textContent = 'This form is protected by reCAPTCHA to prevent spam.';
+        submitBtn.insertAdjacentElement('beforebegin', captchaNote);
+    }
+
+    // Handle form submission
+    feedbackForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Execute reCAPTCHA
+        grecaptcha.ready(function() {
+            grecaptcha.execute('6LfsmFwrAAAAAAt5dVgB7nJmMaHVcNjTxH-t_Hr9', {action: 'submit'})
+                .then(function(token) {
+                    // Verify CAPTCHA first
+                    if (!token) {
+                        alert("CAPTCHA verification failed. Please try again.");
+                        return;
+                    }
+
+                    // Collect form data
+                    const formData = {
+                        name: document.getElementById('name').value,
+                        email: document.getElementById('email').value,
+                        service: document.getElementById('service').value,
+                        rating: document.querySelector('input[name="rating"]:checked')?.value,
+                        feedback: document.getElementById('feedback').value,
+                        recaptcha: token
+                    };
+
+                    // In production: Send to server for verification
+                    console.log('Form data with CAPTCHA token:', formData);
+
+                    // Simulate server verification
+                    setTimeout(() => {
+                        // Show thank you message
+                        feedbackForm.style.display = 'none';
+                        thankYouSection.style.display = 'block';
+                        thankYouSection.scrollIntoView({ behavior: 'smooth' });
+
+                        // Reset form
+                        feedbackForm.reset();
+                        grecaptcha.reset();
+                    }, 1000);
+                });
+        });
+    });
+
+    // Rating animation (optional)
+    const ratingOptions = document.querySelectorAll('.rating-option');
+    ratingOptions.forEach(option => {
+        option.addEventListener('mouseenter', () => option.style.transform = 'scale(1.1)');
+        option.addEventListener('mouseleave', () => option.style.transform = 'scale(1)');
+    });
+});
+
+    </script>
+</body>
+</html>
