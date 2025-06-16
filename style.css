@@ -1,0 +1,211 @@
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Feedback Section */
+        .feedback-section {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 40px auto;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            max-width: 800px;
+        }
+
+        .feedback-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            font-size: 2rem;
+        }
+
+        .feedback-subtitle {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #7f8c8d;
+        }
+
+        /* Form Styles */
+        .feedback-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .feedback-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .feedback-form input,
+        .feedback-form select,
+        .feedback-form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+
+        .feedback-form input:focus,
+        .feedback-form select:focus,
+        .feedback-form textarea:focus {
+            border-color: #6e8efb;
+            outline: none;
+        }
+
+        .feedback-form textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Rating Styles */
+        .rating-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .rating-option {
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .rating-option:hover {
+            transform: scale(1.1);
+        }
+
+        .rating-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+        }
+
+        .rating-input {
+            display: none;
+        }
+
+        .rating-input:checked + .rating-label {
+            color: #6e8efb;
+        }
+
+        .rating-label {
+            display: block;
+            cursor: pointer;
+        }
+
+
+        /* Captcha */
+        .grecaptcha-badge {
+            visibility: hidden;
+        }
+
+        .captcha-note {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            margin-top: -15px;
+            margin-bottom: 20px;
+        }
+
+        /* Button Styles */
+        .submit-btn {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: block;
+            width: 100%;
+            font-weight: 600;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(110, 142, 251, 0.4);
+        }
+
+        /* Thank You Message */
+        .thank-you {
+            text-align: center;
+            padding: 40px;
+            display: none;
+        }
+
+        .thank-you h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .thank-you p {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+        }
+
+        .thank-you-icon {
+            font-size: 4rem;
+            color: #27ae60;
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .rating-container {
+                flex-direction: column;
+            }
+
+            .rating-option {
+                margin-bottom: 15px;
+            }
+
+            .feedback-section {
+                padding: 20px;
+                margin: 20px auto;
+            }
+        }
