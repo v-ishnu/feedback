@@ -5,9 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feedback | Dinestx</title>
-    <script src="https://www.google.com/recaptcha/api.js"></script>
-    <script src="/script.js"></script>
-    <link rel="stylesheet" href="/style.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -23,7 +22,13 @@
             <h1 class="feedback-title">Share Your Feedback</h1>
             <p class="feedback-subtitle">We value your opinion to help us improve our services</p>
 
-            <form id="feedbackForm" class="feedback-form" action="https://formsubmit.co/dinestx@gmail.com" method="POST">
+            <form id="feedbackForm" class="feedback-form" method="POST">
+                <!-- FormSubmit configuration -->
+                <input type="hidden" name="_next" value="?success=true">
+                <input type="hidden" name="_subject" value="New Feedback Submission">
+                <input type="hidden" name="_template" value="table">
+                <input type="text" name="_honey" style="display:none">
+                
                 <div class="form-group">
                     <label for="name">Your Name</label>
                     <input type="text" id="name" name="name" required>
@@ -51,7 +56,7 @@
                     <div class="rating-container">
                         <div class="rating-option">
                             <div class="rating-emoji">😞</div>
-                            <input type="radio" id="rating-1" name="rating" value="1" class="rating-input">
+                            <input type="radio" id="rating-1" name="rating" value="1" class="rating-input" required>
                             <label for="rating-1" class="rating-label">Very Dissatisfied</label>
                         </div>
                         <div class="rating-option">
@@ -79,18 +84,16 @@
 
                 <div class="form-group">
                     <label for="feedback">Your Feedback</label>
-                    <textarea id="feedback" name="feedback" placeholder="Tell us about your experience..."
-                        required></textarea>
+                    <textarea id="feedback" name="feedback" placeholder="Tell us about your experience..." required></textarea>
                 </div>
 
-                <!-- Add CAPTCHA field -->
+                <!-- reCAPTCHA v2 Checkbox -->
                 <div class="form-group">
-                    <div class="g-recaptcha" data-sitekey="YOUR_SITE_KEY" data-callback="enableSubmit"
-                        data-size="invisible"></div>
+                    <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
                     <p class="captcha-note">This form is protected by reCAPTCHA to prevent spam.</p>
                 </div>
 
-                <button type="submit" class="submit-btn">Submit Feedback</button>
+                <button type="submit" class="submit-btn" id="submitBtn">Submit Feedback</button>
             </form>
 
             <div class="thank-you" id="thankYou">
@@ -108,6 +111,8 @@
             <p>&copy; 2025 Dinestx Solutions. All rights reserved.</p>
         </div>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 
 </html>
